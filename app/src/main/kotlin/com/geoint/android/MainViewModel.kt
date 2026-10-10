@@ -94,7 +94,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         _state.update { it.copy(photoUri = uri, photo = null, loadingPhoto = true, outcome = null, error = null, log = emptyList(), liveText = "") }
         viewModelScope.launch {
             try {
-                val photo = withContext(Dispatchers.IO) { PhotoLoader.load(getApplication(), uri, _state.value.settings.tiles) }
+                val photo = withContext(Dispatchers.IO) { PhotoLoader.load(getApplication<Application>(), uri, _state.value.settings.tiles) }
                 _state.update { it.copy(photo = photo, loadingPhoto = false) }
             } catch (e: Exception) {
                 _state.update { it.copy(loadingPhoto = false, error = "Could not open the photo: ${e.message}") }

@@ -28,6 +28,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.selection.SelectionContainer
@@ -306,7 +307,7 @@ private fun SettingsDialog(current: AppSettings, onDismiss: () -> Unit, onSave: 
                     }
                 }
                 Text("Effort (higher = smarter, slower, pricier)", fontWeight = FontWeight.Bold)
-                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                     AppSettings.EFFORTS.forEach { e ->
                         FilterChip(selected = s.effort == e, onClick = { s = s.copy(effort = e) }, label = { Text(e, fontSize = 11.sp) })
                     }
